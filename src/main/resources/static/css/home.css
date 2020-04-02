@@ -1,0 +1,25 @@
+.category-option{
+  background-color: mediumturquoise;
+  border-color: darkturquoise;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  text-align: center;
+  margin: 2%;
+  font-size: 15px;
+  padding: 2rem !important;
+  display: inline-flex;
+  color: #000;
+  height: 8em;
+  width: 8em;
+}
+
+.category-option:hover{
+  cursor:pointer;
+  background-color: darkturquoise;
+}
+
+.newcategory-option{
+  border-color: black !important;
+  background-color: steelblue !important;
+}

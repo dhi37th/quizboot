@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <th:block th:insert="~{fragments/fragment-header :: meta}"></th:block>
+  <th:block th:insert="~{fragments/fragment-header :: title}"></th:block>
+  <th:block th:insert="~{fragments/fragment-header :: link}"></th:block>
+  <link rel="stylesheet" th:href="@{/css/home.css}">
+</head>
+<body>
+<th:block th:insert="fragments/fragment-header :: header"></th:block>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 overflow-auto">
+      <h1>Your score <span th:text="${score}">0</span></h1>
+      <table class="table table-bordered table-lg mt-1">
+        <caption class="ml-2"> <a class="btn btn-primary" th:href="@{/play}">Play another category</a>
+        </caption>
+        <thead class="thead-dark">
+        <tr>
+          <th scope="col">Question</th>
+          <th scope="col">Correct Answer</th>
+          <th scope="col">Selected Answer</th>
+          <th scope="col">Is Correct</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${results.empty}">
+          <th scope="row">No result available</th>
+        </tr>
+        <tr th:each="result : ${results}" th:style="${result.correct ? 'background:#85ce7f !important' : 'background:#f94153 !important'}">
+          <td><span th:text="${result.questionText}"> Question </span></td>
+          <td><span th:text="${result.correctAnswer}"> Correct Answer </span></td>
+          <td><span th:text="${result.selectedAnswer}"> Selected Answer </span></td>
+          <td><span th:text="${result.correct} ? '&#10003;' : '&#10005;'" ></span></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<th:block th:insert="~{fragments/fragment-header :: body/script}"></th:block>
+</body>
+</html>

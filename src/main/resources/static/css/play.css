@@ -1,0 +1,41 @@
+.play-option{
+  cursor:pointer;
+  background-color: mistyrose;
+}
+
+.play-option:hover{
+  cursor:pointer;
+  background-color: pink;
+}
+
+.play-col{
+  background: lightgray;
+}
+
+.play-question{
+  background: #FF1493;
+}
+
+.question-selectors{
+  background-color: mistyrose;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  text-align: center;
+  margin: 5px 20px;
+  font-size: 15px;
+  padding: 15px;
+  display: inline-flex;
+  height: 4em;
+  width: 4em;
+  color: #000;
+}
+.question-selectors:hover{
+  cursor:pointer;
+  background-color: pink;
+}
+
+
+.current_selector, .current_selector:hover{
+  background-color: #FF1493;
+}

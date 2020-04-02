@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <th:block th:insert="~{fragments/fragment-header :: meta}"></th:block>
+  <th:block th:insert="~{fragments/fragment-header :: title}"></th:block>
+  <th:block th:insert="~{fragments/fragment-header :: link}"></th:block>
+  <link rel="stylesheet" th:href="@{/css/play.css}">
+</head>
+<body>
+<th:block th:insert="fragments/fragment-header :: header"></th:block>
+<div class="container">
+  <form action="#" th:action="@{/play}" th:object="${answerDto}" method="post">
+    <div class="row" th:if="not ${#lists.isEmpty(answerDto.answers)}">
+      <div th:each="answer,answerStat : *{answers}"
+           class="col-lg-6 border-dark shadow mb-3 mt-3 rounded play-col"
+           th:classappend="${answerStat.index + 1 != 1}? 'd-none'"
+           th:data-question_id="${answerStat.index + 1}">
+        <div class="row">
+          <div class="col p-3 m-3 play-question">
+            <h4 class="text-center p-3 mb-3" th:text="${answer.question.text}">Question</h4>
+          </div>
+        </div>
+        <div class="row">
+          <div th:each="option : ${answer.question.options}"
+               class="col-lg-10 offset-lg-1 border-dark shadow p-1 mb-3 rounded play-option"
+               th:data-option_id="${option.key}"
+               th:onclick="|selectOption(${answerStat.index + 1}, ${option.key}, ${#lists.size(answerDto.answers)})|">
+            <h6 th:text="${option.value.text}" class="text-center p-3">Option</h6>
+          </div>
+        </div>
+        <div class="row">
+          <input type="hidden" hidden th:field="*{answers[__${answerStat.index}__].question.id}">
+          <input type="hidden" hidden th:field="*{answers[__${answerStat.index}__].selectedOption}">
+        </div>
+      </div>
+      <div class="col-lg-4 offset-lg-2 border-dark shadow mb-3 mt-3 rounded play-col"
+           th:with="noOfQues= ${#lists.size(answerDto.answers)}">
+        <div class="row">
+          <div class="col-lg-12 p-3 mb-5 border-bottom border-dark text-center">
+            <input class="btn btn-primary" type="submit" value="Submit">
+          </div>
+          <div class="col-lg-12 question_selectors_list">
+            <div class="question-selectors"
+                 th:classappend="${i == 1}? 'current_selector'"
+                 th:each="i : ${#numbers.sequence( 1, noOfQues, 1)}"
+                 th:onclick="|selectQuestion(${i} , ${noOfQues})|"
+                 th:data-answered_id="${i}">
+              <p class="mb-0" th:text="${i}">Question Selector</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" th:if="${#lists.isEmpty(answerDto.answers)}">
+      <div class="col-lg-12 text-center">
+        <h1 class="bg-danger p-3">No questions available!</h1>
+        <a class="btn btn-primary m-3" th:href="@{/play}">Create new Category?</a>
+      </div>
+    </div>
+    <input type="hidden" hidden th:field="${answerDto.categoryId}">
+  </form>
+</div>
+<th:block th:insert="~{fragments/fragment-header :: body/script}"></th:block>
+<script th:src="@{/js/play.js}"></script>
+</body>
+</html>
