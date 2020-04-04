@@ -1,7 +1,7 @@
 package com.dhita.quizboot.model;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,12 +13,32 @@ import lombok.Data;
 
 @Entity
 @Data
-public class Category  implements Serializable {
+public class Category implements Serializable {
   private static final long serialVersionUID = 1;
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column @NotNull @NotEmpty private String name;
+  @Column(nullable = false, unique = true)
+  @NotNull
+  @NotEmpty
+  private String name;
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Category category = (Category) o;
+    return Objects.equals(name.toUpperCase(), category.name.toUpperCase());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(name.toUpperCase());
+  }
 }

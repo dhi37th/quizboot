@@ -1,3 +1,6 @@
+insert into USER (ADMIN, USERNAME, NAME, PASSWORD,LOCKED) values (true,'admin','Admin','A+98FnMIylJGjl2jhHcUYQ==',false);
+insert into USER (ADMIN, USERNAME, NAME, PASSWORD,LOCKED) values (false,'user','User','A+98FnMIylJGjl2jhHcUYQ==',false);
+
 insert into category(name) values ('POLITICS');
 insert into category(name) values ('GAMING');
 insert into category(name) values ('COMPUTER');

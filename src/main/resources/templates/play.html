@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
   <th:block th:insert="~{fragments/fragment-header :: meta}"></th:block>
   <th:block th:insert="~{fragments/fragment-header :: title}"></th:block>
@@ -54,7 +55,7 @@
     <div class="row" th:if="${#lists.isEmpty(answerDto.answers)}">
       <div class="col-lg-12 text-center">
         <h1 class="bg-danger p-3">No questions available!</h1>
-        <a class="btn btn-primary m-3" th:href="@{/play}">Create new Category?</a>
+        <a class="btn btn-primary m-3" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/category}">Create new Category?</a>
       </div>
     </div>
     <input type="hidden" hidden th:field="${answerDto.categoryId}">
