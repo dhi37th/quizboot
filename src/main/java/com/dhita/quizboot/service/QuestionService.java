@@ -2,9 +2,9 @@ package com.dhita.quizboot.service;
 
 import com.dhita.quizboot.model.Question;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
+import org.springframework.validation.BindingResult;
 
 public interface QuestionService {
 
@@ -24,25 +24,6 @@ public interface QuestionService {
    * @return List
    */
   List<Question> findAll(Long categoryId);
-
-  /**
-   * Find by category
-   *
-   * @param category category
-   * @param size size
-   * @return Map
-   */
-  Map<Integer, Question> findAllByCategory(Long category, Integer size);
-
-  /**
-   * Find all by filter
-   *
-   * @param categoryId category id
-   * @param pageNumber pageNumber
-   * @param size size
-   * @return Page
-   */
-  Page<Question> findAll(Long categoryId, int pageNumber, int size);
 
   /**
    * Find all
@@ -88,4 +69,12 @@ public interface QuestionService {
    * @param questionId question id
    */
   void delete(Long questionId);
+
+  /**
+   * Check if the question exits for a category
+   *
+   * @param question question
+   * @param bindingResult binding result
+   */
+  void checkQuestionExistsForCategory(Question question, BindingResult bindingResult);
 }

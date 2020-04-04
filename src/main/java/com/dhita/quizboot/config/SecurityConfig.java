@@ -42,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     http.authorizeRequests()
         .anyRequest()
-        .permitAll() //method level authentication is in place
+        .permitAll() // method level authentication is in place
         .and()
         .formLogin()
         .loginPage(LOGIN_URL)

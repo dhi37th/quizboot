@@ -15,7 +15,7 @@
       <div class="alert alert-info" th:if="${added == true}">
         Question added.
       </div>
-      <div th:if="${#fields.hasErrors('question.*')}">
+      <div class="alert alert-danger" th:if="${#fields.hasErrors('question.*')}">
         <p style="color:red;" th:each="err : ${#fields.errors('question.*')}" th:text="${err}"></p>
       </div>
       <form action="#" th:action="@{/question}" th:object="${question}" method="post">

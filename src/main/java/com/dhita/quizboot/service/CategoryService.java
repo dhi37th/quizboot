@@ -36,7 +36,7 @@ public interface CategoryService {
    * @param bindingResult binding result
    * @return
    */
-  BindingResult checkCategoryExist(CategoryDto categoryDto, BindingResult bindingResult);
+  void checkCategoryExist(CategoryDto categoryDto, BindingResult bindingResult);
 
   /**
    * Save multiple category together

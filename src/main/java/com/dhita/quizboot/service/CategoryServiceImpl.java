@@ -30,7 +30,7 @@ public class CategoryServiceImpl implements CategoryService {
   }
 
   @Override
-  public BindingResult checkCategoryExist(CategoryDto categoryDto, BindingResult bindingResult) {
+  public void checkCategoryExist(CategoryDto categoryDto, BindingResult bindingResult) {
     List<Category> categories = categoryRepository.findAll();
     categories.stream().filter(category -> {
       return categoryDto.getCategories().contains(category);
@@ -38,7 +38,6 @@ public class CategoryServiceImpl implements CategoryService {
       log.info("Non unique category "+category.toString());
       bindingResult.addError(new ObjectError("categoryerror", "Category "+category.getName()+" already present"));
     });
-    return bindingResult;
   }
 
   @Override
