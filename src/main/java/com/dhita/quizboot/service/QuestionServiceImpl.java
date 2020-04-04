@@ -20,6 +20,24 @@ public class QuestionServiceImpl implements QuestionService {
   @Autowired QuestionRepository questionRepository;
 
   @Override
+  public void checkForErrorInNewQuestion(Question question, BindingResult bindingResult) {
+    long correctCount =
+        question.getOptions().entrySet().stream()
+            .filter(
+                integerOptionEntry -> {
+                  return integerOptionEntry.getValue().isCorrect();
+                })
+            .count();
+    if (correctCount > 1) {
+      bindingResult.addError(new ObjectError("correctCount", "Only one option can be correct"));
+    } else if (correctCount < 1) {
+      bindingResult.addError(
+          new ObjectError("correctCount", "Atleast one option should be correct"));
+    }
+    checkQuestionExistsForCategory(question, bindingResult);
+  }
+
+  @Override
   public void checkQuestionExistsForCategory(Question question, BindingResult bindingResult) {
     List<Question> questionList =
         questionRepository.findAllByCategoryId(question.getCategory().getId());

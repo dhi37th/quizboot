@@ -77,4 +77,6 @@ public interface QuestionService {
    * @param bindingResult binding result
    */
   void checkQuestionExistsForCategory(Question question, BindingResult bindingResult);
+
+  void checkForErrorInNewQuestion(Question question, BindingResult bindingResult);
 }

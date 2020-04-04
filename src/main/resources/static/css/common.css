@@ -1,3 +1,7 @@
 body{
   background-color: gray;
 }
+
+.bg-lightgray{
+  background-color: lightgray;
+}

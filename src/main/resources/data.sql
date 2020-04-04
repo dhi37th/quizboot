@@ -12,7 +12,7 @@ insert into category(name) values ('BIKES');
 insert into category(name) values ('SCIENCE');
 insert into category(name) values ('PHYSICS');
 
-insert into question(category_id,options,text) values (2,'{"1":{"text":"CS","correct":true},"2":{"text":"DOTA","correct":false},"3":{"text":"Call Of Duty","correct":false},"4":{"text":"NFS","correct":true}}','Game with highest prize money pool ?');
+insert into question(category_id,options,text) values (2,'{"1":{"text":"CS","correct":false},"2":{"text":"DOTA","correct":true},"3":{"text":"Call Of Duty","correct":false},"4":{"text":"NFS","correct":false}}','Game with highest prize money pool ?');
 insert into question(category_id,options,text) values (2,'{"1":{"text":"NFS","correct":true},"2":{"text":"CS","correct":false},"3":{"text":"LOL","correct":false},"4":{"text":"DOTA","correct":false}}','Which among the following is not a multiplayer team game ?');
 insert into question(category_id,options,text) values (2,'{"1":{"text":"Leage of Legends","correct":false},"2":{"text":"Candy Crush","correct":true},"3":{"text":"Call of Duty: Modern Warfare","correct":false},"4":{"text":"Hitman - 4","correct":false}}','Which of the following is a mobile based game ?');
 

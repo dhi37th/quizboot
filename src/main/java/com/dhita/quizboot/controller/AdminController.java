@@ -17,7 +17,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -67,21 +66,7 @@ public class AdminController {
       BindingResult bindingResult,
       Model model,
       RedirectAttributes redirectAttributes) {
-    long correctCount =
-        question.getOptions().entrySet().stream()
-            .filter(
-                integerOptionEntry -> {
-                  return integerOptionEntry.getValue().isCorrect();
-                })
-            .count();
-    if (correctCount > 1) {
-      bindingResult.addError(new ObjectError("correctCount", "Only one option can be correct"));
-    } else if (correctCount < 1) {
-      bindingResult.addError(
-          new ObjectError("correctCount", "Atleast one option should be correct"));
-    }
     questionService.checkQuestionExistsForCategory(question, bindingResult);
-
     if (bindingResult.hasErrors()) {
       model.addAttribute("categories", categoryService.findAll());
       return "question_new";
@@ -89,6 +74,17 @@ public class AdminController {
     questionService.save(question);
     redirectAttributes.addFlashAttribute("added", true);
     return "redirect:/question";
+  }
+
+  @PostMapping("/question/delete")
+  public String deleteQuestion(
+      @ModelAttribute(value="quesToDelete") Question quesToDelete,
+      RedirectAttributes redirectAttributes,
+      @RequestParam("page") Optional<Integer> page) {
+    int currentPage = page.orElse(1);
+    questionService.delete(quesToDelete.getId());
+    redirectAttributes.addFlashAttribute("questionDeleted", true);
+    return "redirect:/questions?page="+currentPage;
   }
 
   @GetMapping("/category")
