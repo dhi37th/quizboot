@@ -12,10 +12,16 @@
   <div class="row">
     <div class="col-sm-8 offset-sm-2 border-dark shadow bg-white rounded">
       <h2 style="text-align:center;">Add Question</h2>
-      <div class="alert alert-info" th:if="${added == true}">
+      <div class="alert alert-info alert-dismissible" th:if="${added == true}">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true" style="font-size:20px">×</span>
+        </button>
         Question added.
       </div>
-      <div class="alert alert-danger" th:if="${#fields.hasErrors('question.*')}">
+      <div class="alert alert-danger alert-dismissible" th:if="${#fields.hasErrors('question.*')}">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true" style="font-size:20px">×</span>
+        </button>
         <p style="color:red;" th:each="err : ${#fields.errors('question.*')}" th:text="${err}"></p>
       </div>
       <form action="#" th:action="@{/question}" th:object="${question}" method="post">

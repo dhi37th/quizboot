@@ -11,7 +11,7 @@
   <div class="row">
     <div class="col-sm-8 offset-sm-2 border-dark shadow bg-white rounded">
       <h2 style="text-align:center;">New User</h2>
-      <div th:if="${#fields.hasErrors('user.*')}">
+      <div class="alert alert-danger alert-dismissible" th:if="${#fields.hasErrors('user.*')}">
         <p style="color:red;" th:each="err : ${#fields.errors('user.*')}" th:text="${err}"></p>
       </div>
       <form action="#" th:action="@{/user}" th:object="${user}" method="post">
@@ -42,6 +42,7 @@
         <div class="form-group form-row">
           <div class="col-sm-10 offset-sm-2">
             <input class="btn btn-primary" type="submit" value="Sign Up">
+            <a class="ml-4" th:href="@{/}">Cancel</a>
           </div>
         </div>
       </form>
