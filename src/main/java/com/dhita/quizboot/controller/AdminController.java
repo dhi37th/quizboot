@@ -9,6 +9,7 @@ import com.dhita.quizboot.service.QuestionService;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -36,13 +37,22 @@ public class AdminController {
   public String getHome(
       Model model,
       @RequestParam("page") Optional<Integer> page,
-      @RequestParam("size") Optional<Integer> size) {
+      @RequestParam("size") Optional<Integer> size,
+      @RequestParam("category") Optional<Long> category) {
     int currentPage = page.orElse(1);
     int pageSize = size.orElse(8);
-    model.addAttribute("questions", questionService.findAll(currentPage - 1, pageSize));
+    if (category.isPresent()) {
+      model.addAttribute(
+          "questions", questionService.findAll(category.get(), currentPage - 1, pageSize));
+    } else {
+      model.addAttribute("questions", questionService.findAll(currentPage - 1, pageSize));
+    }
     model.addAttribute("module", "allquestions");
+    model.addAttribute("categories", categoryService.findAll());
     return "question_list";
   }
+
+
 
   @GetMapping({"/question"})
   public String getAddNewQuiz(
@@ -78,13 +88,13 @@ public class AdminController {
 
   @PostMapping("/question/delete")
   public String deleteQuestion(
-      @ModelAttribute(value="quesToDelete") Question quesToDelete,
+      @ModelAttribute(value = "quesToDelete") Question quesToDelete,
       RedirectAttributes redirectAttributes,
       @RequestParam("page") Optional<Integer> page) {
     int currentPage = page.orElse(1);
     questionService.delete(quesToDelete.getId());
     redirectAttributes.addFlashAttribute("questionDeleted", true);
-    return "redirect:/questions?page="+currentPage;
+    return "redirect:/questions?page=" + currentPage;
   }
 
   @GetMapping("/category")

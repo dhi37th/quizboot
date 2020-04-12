@@ -3,8 +3,8 @@ $(function(){
       var newCat = parseInt($('#catSize').val());
       var text =
       "<div class='form-group form-row'>"+
-        "<label for='categories["+newCat+"].name' class='col-sm-2 col-form-label'>Category</label>"+
-        "<div class='col-sm-10'>"+
+        "<label for='categories["+newCat+"].name' class='col-2 col-form-label'>Category</label>"+
+        "<div class='col-10'>"+
           "<input required type='text' class='form-control input-sm' id='categories"+newCat+".name' name='categories["+newCat+"].name' value='' oninput='changeInput(this);'>"+
         "</div>"+
       "</div>";

@@ -29,11 +29,11 @@
         <div id="categoryDiv">
           <div class="form-group form-row" th:each="category,categoryStat : *{categories}">
             <label th:for="categories[__${categoryStat.index}__].name"
-                   class="col-sm-2 col-form-label">Category</label>
-            <div class="col-sm-10">
+                   class="col-2 col-form-label">Category</label>
+            <div class="col-10">
               <input required type="text" class="form-control input-sm catInput"
                      th:field="*{categories[__${categoryStat.index}__].name}"
-                     oninput='changeInput(this);'>
+                     oninput="changeInput(this);">
             </div>
           </div>
         </div>

@@ -26,6 +26,14 @@ public interface QuestionService {
   List<Question> findAll(Long categoryId);
 
   /**
+   * Find all by category and page
+   *
+   * @param categoryId
+   * @return
+   */
+  Page<Question> findAll(Long categoryId,int pageNumber, int size);
+
+  /**
    * Find all
    *
    * @return List

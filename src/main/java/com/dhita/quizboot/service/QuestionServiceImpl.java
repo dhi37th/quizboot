@@ -71,6 +71,12 @@ public class QuestionServiceImpl implements QuestionService {
   }
 
   @Override
+  public Page<Question> findAll(Long categoryId,int pageNumber, int size) {
+    Pageable page = PageRequest.of(pageNumber, size);
+    return questionRepository.findAllByCategoryId(categoryId,page);
+  }
+
+  @Override
   public List<Question> findAll() {
     return questionRepository.findAll();
   }
