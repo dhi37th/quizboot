@@ -4,6 +4,10 @@ Play quiz with multiple category. Admin can add, edit, delete questions and also
 #URL
 http://localhost:8080/quiz
 
+#Default credentials
+admin / password
+user / password
+
 # Main Game
 ![Play Quiz](https://github.com/dhi37th/projectscreenshots/blob/master/Project_Screenshot/quizboot/play.gif)
 
